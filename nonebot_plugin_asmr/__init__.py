@@ -129,28 +129,18 @@ async def _play(bot: Bot, matcher: Matcher, ev: MessageEvent, state: T_State, ar
     state["iurl"]=r["mainCoverUrl"]
     img=r["mainCoverUrl"]
     print(img)
+    async def process_item(item):
+        if item["type"] == "audio":
+            keywords.append(item["title"])
+            urls.append(item["mediaDownloadUrl"])
+        elif item["type"] == "folder":
+            for child in item["children"]:
+                await process_item(child)
     url=f"https://api.asmr-200.com/api/tracks/{rid}"
     response = await session.get(url, headers=headers, timeout=10)
     result = await response.json()
     for result2 in result:
-        if result2["type"] =="folder":
-            for dictt in result2["children"]:
-                if dictt["type"] =="audio":
-                    keywords.append(dictt["title"])
-                    urls.append(dictt["mediaDownloadUrl"])
-                elif dictt["type"] =="folder":
-                    for dicttt in dictt["children"]:
-                        if dicttt["type"] =="audio":
-                            keywords.append(dicttt["title"])
-                            urls.append(dicttt["mediaDownloadUrl"])
-                        elif dicttt["type"] =="folder":
-                            for dictttt in dicttt["children"]:
-                                if dictttt["type"] =="audio":
-                                    keywords.append(dictttt["title"])
-                                    urls.append(dictttt["mediaDownloadUrl"])
-        elif result2["type"] =="audio":
-            keywords.append(result2["title"])
-            urls.append(result2["mediaDownloadUrl"])
+        await process_item(result2)
     state["keywords"] = keywords
     state["urls"] = urls
     state["ar"] = ar
