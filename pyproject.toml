@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "nonebot-plugin-asmr"
-version = "0.1.0"
+version = "0.1.1"
 description = "一个简易的能在群里听音声的插件"
 authors = ["CCYellowStar"]
 license = "GPL-3.0-only"
 readme = "README.md"
-homepage = "https://github.com/CCYellowStar2/nonebot_plugin_asmr"
-repository = "https://github.com/CCYellowStar2/nonebot_plugin_asmr"
+homepage = "https://github.com/CCYellowStar2/nonebot-plugin-asmr"
+repository = "https://github.com/CCYellowStar2/nonebot-plugin-asmr"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4"
