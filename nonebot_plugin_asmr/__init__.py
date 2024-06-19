@@ -114,7 +114,6 @@ async def _play(bot: Bot, matcher: Matcher, ev: MessageEvent, state: T_State, ar
         await play.finish("输入的RJ号不符合格式，必须以RJ开头！", at_sender=True)
         return
     rid = arg[0][2:]
-    print(rid)
     await play.send(f"正在查询音声信息！", at_sender=True)
     session = aiohttp.ClientSession()
     res = await session.get(f"https://api.asmr-200.com/api/workInfo/{rid}", headers=headers, timeout=10)
@@ -128,7 +127,6 @@ async def _play(bot: Bot, matcher: Matcher, ev: MessageEvent, state: T_State, ar
     ar=r["name"]
     state["iurl"]=r["mainCoverUrl"]
     img=r["mainCoverUrl"]
-    print(img)
     async def process_item(item):
         if item["type"] == "audio":
             keywords.append(item["title"])
@@ -162,7 +160,6 @@ async def _play(bot: Bot, matcher: Matcher, ev: MessageEvent, state: T_State, ar
     
 @play.got("ids")   
 async def _play2(bot: Bot, ev: MessageEvent, state: T_State, reply: str = ArgPlainText("ids")):
-    print(reply)
     try:
         a=int(reply)
     except:
