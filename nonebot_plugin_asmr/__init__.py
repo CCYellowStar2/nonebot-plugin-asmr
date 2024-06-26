@@ -180,6 +180,6 @@ async def _play2(bot: Bot, ev: MessageEvent, state: T_State, reply: str = ArgPla
     url = state["url"]
     imgurl = state["iurl"]
     ar = state["ar"]
-    m = MessageSegment("music", {"type": "custom","subtype":"163", "url": url, "voice": urls, "title": keywords,"content": ar,"image": imgurl})
+    m = MessageSegment("music", {"type": "custom","subtype":"163", "url": url, "audio": urls, "voice": urls, "title": keywords,"content": ar,"image": imgurl})
     await play.send(m)
     return
